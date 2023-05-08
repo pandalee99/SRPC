@@ -25,6 +25,14 @@
 
 <a name="UlREa"></a>
 
+<br/>
+<br/>
+详细的描述写在了我的博客
+<br/>
+https://pandalee99.github.io/2022/11/02/srpc/
+<br/>
+下面是测试环节：
+
 ### 测试
 
 由于使用Nacos，调试比较简单：<br />下载好Nacos，无论是win版还是linux版，在官网都有，比较方便；<br />但是由于Nacos一般都要配置数据库，为了方便测试，可以使用命令先进行单机运行
