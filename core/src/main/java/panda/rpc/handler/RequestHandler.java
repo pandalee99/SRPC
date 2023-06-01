@@ -41,3 +41,13 @@ public class RequestHandler {
     }
 
 }
+
+
+
+/*
+在Java中，Method类是反射机制的一部分，它代表一个类中的一个方法。
+可以使用Method类来获取关于方法的信息，如方法名、参数列表、返回类型、修饰符等，
+并且可以使用Method类来调用该方法。Method类提供了许多用于获取和调用方法的方法，
+如invoke()、getName()、getParameterTypes()、getReturnType()等。
+反射机制中的Method类可以使得在运行时动态地获取和调用类中的方法。
+ */

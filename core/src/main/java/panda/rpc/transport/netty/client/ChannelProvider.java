@@ -22,19 +22,7 @@ import java.util.concurrent.TimeUnit;
 /**
  * 用于获取 Channel 对象
  */
-/*
-这段代码实现了一个ChannelProvider类，它是一个单例模式，用于提供与服务器建立连接的Netty Channel。
-该类维护了一个静态的Bootstrap实例，用于启动客户端连接，也维护了一个静态的Map用于缓存已连接的Channel，避免重复连接。
 
-在get()方法中，首先会根据传入的inetSocketAddress和serializer生成一个唯一的key，用于在缓存Map中查找Channel。
-如果Map中已经有该Channel并且该Channel是可用的，直接返回这个Channel。
-否则，先将这个Channel从Map中移除，再重新连接服务器，建立新的Channel。
-最后，将新建的或者已存在的Channel保存到Map中，并返回该Channel。
-Bootstrap是Netty中的一个重要组件，它用于配置Netty客户端或服务器的启动参数，并且可以创建和管理Channel。
-在该类中，通过initializeBootstrap()方法初始化了Bootstrap实例，包括线程模型、Channel类型、连接超时时间、心跳机制等。
-在connect()方法中，使用CompletableFuture异步方式建立客户端连接，并通过ChannelFutureListener回调函数处理连接结果。
-如果连接成功，将返回一个Channel实例，否则返回null。
- */
 public class ChannelProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(ChannelProvider.class);
@@ -72,6 +60,7 @@ public class ChannelProvider {
             return null;
         }
         channels.put(key, channel);
+        logger.info("创造一个Channel"+channel.toString());
         return channel;
     }
 
@@ -104,3 +93,25 @@ public class ChannelProvider {
 
 }
 
+
+
+
+
+
+
+
+
+
+/*
+这段代码实现了一个ChannelProvider类，它是一个单例模式，用于提供与服务器建立连接的Netty Channel。
+该类维护了一个静态的Bootstrap实例，用于启动客户端连接，也维护了一个静态的Map用于缓存已连接的Channel，避免重复连接。
+
+在get()方法中，首先会根据传入的inetSocketAddress和serializer生成一个唯一的key，用于在缓存Map中查找Channel。
+如果Map中已经有该Channel并且该Channel是可用的，直接返回这个Channel。
+否则，先将这个Channel从Map中移除，再重新连接服务器，建立新的Channel。
+最后，将新建的或者已存在的Channel保存到Map中，并返回该Channel。
+Bootstrap是Netty中的一个重要组件，它用于配置Netty客户端或服务器的启动参数，并且可以创建和管理Channel。
+在该类中，通过initializeBootstrap()方法初始化了Bootstrap实例，包括线程模型、Channel类型、连接超时时间、心跳机制等。
+在connect()方法中，使用CompletableFuture异步方式建立客户端连接，并通过ChannelFutureListener回调函数处理连接结果。
+如果连接成功，将返回一个Channel实例，否则返回null。
+ */

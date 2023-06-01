@@ -37,12 +37,15 @@ public abstract class AbstractRpcServer implements RpcServer {
             logger.error("出现未知错误");
             throw new RpcException(RpcError.UNKNOWN_ERROR);
         }
+        //获取ServiceScan这个注解下的地址
         String basePackage = startClass.getAnnotation(ServiceScan.class).value();
         if("".equals(basePackage)) {
             basePackage = mainClassName.substring(0, mainClassName.lastIndexOf("."));
         }
+        //获取这个basePackage路径下所有的类
         Set<Class<?>> classSet = ReflectUtil.getClasses(basePackage);
         for(Class<?> clazz : classSet) {
+            //判断是否拥有 Service注解
             if(clazz.isAnnotationPresent(Service.class)) {
                 String serviceName = clazz.getAnnotation(Service.class).name();
                 Object obj;

@@ -12,7 +12,7 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String hello(HelloObject object) {
         logger.info("接收到消息：{}", object.getMessage());
-        return "服务端收到一个信息： "+object.getMessage();
+        return "服务端处理完消息，并回送一个客户端的原信息： "+object.getMessage();
     }
 
 }

@@ -61,7 +61,7 @@ public class NettyClient implements RpcClient {
         this.serviceDiscovery = new NacosServiceDiscovery(loadBalancer);
         //序列化器
         this.serializer = CommonSerializer.getByCode(serializer);
-        //保留意见
+        //单例工厂
         this.unprocessedRequests = SingletonFactory.getInstance(UnprocessedRequests.class);
     }
 
@@ -98,3 +98,25 @@ public class NettyClient implements RpcClient {
     }
 
 }
+
+
+
+
+
+
+
+/*
+
+在RPC框架中，CompletableFuture类通常被用于异步处理远程过程调用(RPC)的结果。
+当客户端发起一个RPC请求时，客户端代码通常会被阻塞，直到远程服务器返回结果。
+使用CompletableFuture类，客户端代码可以在发送RPC请求后，立即返回一个CompletableFuture对象，该对象代表了RPC结果的未来值。
+当远程服务器返回结果时，服务器将结果封装到一个CompletableFuture对象中，客
+户端代码可以使用CompletableFuture的一组方法，等待RPC结果的完成，并在完成后处理结果。
+这种方式可以避免客户端代码阻塞等待RPC结果，从而提高代码的执行效率和可扩展性。
+
+除了用于处理RPC结果之外，CompletableFuture类还可以用于客户端和服务器之间的并行处理，
+比如并行执行多个RPC请求，然后等待所有请求完成后，合并结果并返回给客户端。
+
+在RPC框架中，CompletableFuture类通常是作为异步编程的基础组件，用于实现异步RPC调用和结果处理，提高系统的性能和可扩展性。
+
+ */

@@ -8,7 +8,7 @@ import panda.rpc.serializer.CommonSerializer;
  */
 public interface RpcServer {
 
-    int DEFAULT_SERIALIZER = CommonSerializer.KRYO_SERIALIZER;
+    int DEFAULT_SERIALIZER = CommonSerializer.PROTOBUF_SERIALIZER;
 
     void start();
 

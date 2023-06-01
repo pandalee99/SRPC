@@ -64,3 +64,13 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
     }
 
 }
+/*
+SimpleChannelInboundHandler 是 Netty 中的一个基础类，实现了 ChannelInboundHandler 接口。
+它主要用于处理入站事件，即从对等端接收到的数据或状态更改事件，例如对等端连接或断开连接。
+与 ChannelInboundHandlerAdapter 不同的是，SimpleChannelInboundHandler 可以自动释放资源，
+因此不需要显示地调用 ReferenceCountUtil.release() 释放资源。
+
+当数据从远程节点传入时，SimpleChannelInboundHandler 将自动将其转换为指定类型的对象，
+并在调用 channelRead0() 方法时向你提供该对象，你只需要处理传入的数据。
+可以使用这个类来构建各种应用程序，例如聊天应用程序、游戏服务器、文件传输应用程序等。
+ */
