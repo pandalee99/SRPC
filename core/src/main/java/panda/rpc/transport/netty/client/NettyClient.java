@@ -28,9 +28,9 @@ import java.util.concurrent.CompletableFuture;
  */
 public class NettyClient implements RpcClient {
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyClient.class);
+    private static final Logger         logger = LoggerFactory.getLogger(NettyClient.class);
     private static final EventLoopGroup group;
-    private static final Bootstrap bootstrap;
+    private static final Bootstrap      bootstrap;
 
     static {
         group = new NioEventLoopGroup();
@@ -47,13 +47,16 @@ public class NettyClient implements RpcClient {
     public NettyClient() {
         this(DEFAULT_SERIALIZER, new RandomLoadBalancer());
     }
+
     public NettyClient(LoadBalancer loadBalancer) {
         this(DEFAULT_SERIALIZER, loadBalancer);
     }
+
     public NettyClient(Integer serializer) {
         //随机轮询策略来进行负载均衡
         this(serializer, new RandomLoadBalancer());
     }
+
     public NettyClient(Integer serializer, LoadBalancer loadBalancer) {
         //另一个构造方法，表示自定义负载均衡策略
 

@@ -16,7 +16,7 @@ import java.lang.reflect.Method;
  */
 public class RequestHandler {
 
-    private static final Logger logger = LoggerFactory.getLogger(RequestHandler.class);
+    private static final Logger          logger = LoggerFactory.getLogger(RequestHandler.class);
     private static final ServiceProvider serviceProvider;
 
     static {

@@ -13,13 +13,12 @@ import panda.rpc.util.ReflectUtil;
 import java.net.InetSocketAddress;
 import java.util.Set;
 
-
 public abstract class AbstractRpcServer implements RpcServer {
 
     protected Logger logger = LoggerFactory.getLogger(this.getClass());
 
     protected String host;
-    protected int port;
+    protected int    port;
 
     protected ServiceRegistry serviceRegistry;
     protected ServiceProvider serviceProvider;
@@ -29,7 +28,7 @@ public abstract class AbstractRpcServer implements RpcServer {
         Class<?> startClass;
         try {
             startClass = Class.forName(mainClassName);
-            if(!startClass.isAnnotationPresent(ServiceScan.class)) {
+            if (!startClass.isAnnotationPresent(ServiceScan.class)) {
                 logger.error("启动类缺少 @ServiceScan 注解");
                 throw new RpcException(RpcError.SERVICE_SCAN_PACKAGE_NOT_FOUND);
             }
@@ -39,14 +38,14 @@ public abstract class AbstractRpcServer implements RpcServer {
         }
         //获取ServiceScan这个注解下的地址
         String basePackage = startClass.getAnnotation(ServiceScan.class).value();
-        if("".equals(basePackage)) {
+        if ("".equals(basePackage)) {
             basePackage = mainClassName.substring(0, mainClassName.lastIndexOf("."));
         }
         //获取这个basePackage路径下所有的类
         Set<Class<?>> classSet = ReflectUtil.getClasses(basePackage);
-        for(Class<?> clazz : classSet) {
+        for (Class<?> clazz : classSet) {
             //判断是否拥有 Service注解
-            if(clazz.isAnnotationPresent(Service.class)) {
+            if (clazz.isAnnotationPresent(Service.class)) {
                 String serviceName = clazz.getAnnotation(Service.class).name();
                 Object obj;
                 try {
@@ -55,9 +54,9 @@ public abstract class AbstractRpcServer implements RpcServer {
                     logger.error("创建 " + clazz + " 时有错误发生");
                     continue;
                 }
-                if("".equals(serviceName)) {
+                if ("".equals(serviceName)) {
                     Class<?>[] interfaces = clazz.getInterfaces();
-                    for (Class<?> oneInterface: interfaces){
+                    for (Class<?> oneInterface : interfaces) {
                         publishService(obj, oneInterface.getCanonicalName());
                     }
                 } else {

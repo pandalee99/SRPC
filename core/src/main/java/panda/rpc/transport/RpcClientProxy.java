@@ -8,7 +8,6 @@ import panda.rpc.transport.netty.client.NettyClient;
 import panda.rpc.transport.socket.client.SocketClient;
 import panda.rpc.util.RpcMessageChecker;
 
-
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -30,7 +29,7 @@ public class RpcClientProxy implements InvocationHandler {
 
     @SuppressWarnings("unchecked")
     public <T> T getProxy(Class<T> clazz) {
-        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[]{clazz}, this);
+        return (T) Proxy.newProxyInstance(clazz.getClassLoader(), new Class<?>[] { clazz }, this);
     }
 
     @SuppressWarnings("unchecked")
@@ -42,7 +41,8 @@ public class RpcClientProxy implements InvocationHandler {
         RpcResponse rpcResponse = null;
         if (client instanceof NettyClient) {
             try {
-                CompletableFuture<RpcResponse> completableFuture = (CompletableFuture<RpcResponse>) client.sendRequest(rpcRequest);
+                CompletableFuture<RpcResponse> completableFuture = (CompletableFuture<RpcResponse>) client.sendRequest(
+                        rpcRequest);
                 rpcResponse = completableFuture.get();
             } catch (Exception e) {
                 logger.error("方法调用请求发送失败", e);

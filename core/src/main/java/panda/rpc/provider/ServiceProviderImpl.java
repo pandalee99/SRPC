@@ -16,12 +16,13 @@ public class ServiceProviderImpl implements ServiceProvider {
 
     private static final Logger logger = LoggerFactory.getLogger(ServiceProviderImpl.class);
 
-    private static final Map<String, Object> serviceMap = new ConcurrentHashMap<>();
-    private static final Set<String> registeredService = ConcurrentHashMap.newKeySet();
+    private static final Map<String, Object> serviceMap        = new ConcurrentHashMap<>();
+    private static final Set<String>         registeredService = ConcurrentHashMap.newKeySet();
 
     @Override
     public <T> void addServiceProvider(T service, String serviceName) {
-        if (registeredService.contains(serviceName)) return;
+        if (registeredService.contains(serviceName))
+            return;
         registeredService.add(serviceName);
         serviceMap.put(serviceName, service);
         logger.info("向接口: {} 注册服务: {}", service.getClass().getInterfaces(), serviceName);

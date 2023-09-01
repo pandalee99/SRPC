@@ -13,7 +13,6 @@ import panda.rpc.util.NacosUtil;
 import java.net.InetSocketAddress;
 import java.util.List;
 
-
 public class NacosServiceDiscovery implements ServiceDiscovery {
 
     private static final Logger logger = LoggerFactory.getLogger(NacosServiceDiscovery.class);
@@ -21,15 +20,17 @@ public class NacosServiceDiscovery implements ServiceDiscovery {
     private final LoadBalancer loadBalancer;
 
     public NacosServiceDiscovery(LoadBalancer loadBalancer) {
-        if(loadBalancer == null) this.loadBalancer = new RandomLoadBalancer();
-        else this.loadBalancer = loadBalancer;
+        if (loadBalancer == null)
+            this.loadBalancer = new RandomLoadBalancer();
+        else
+            this.loadBalancer = loadBalancer;
     }
 
     @Override
     public InetSocketAddress lookupService(String serviceName) {
         try {
             List<Instance> instances = NacosUtil.getAllInstance(serviceName);
-            if(instances.size() == 0) {
+            if (instances.size() == 0) {
                 logger.error("找不到对应的服务: " + serviceName);
                 throw new RpcException(RpcError.SERVICE_NOT_FOUND);
             }

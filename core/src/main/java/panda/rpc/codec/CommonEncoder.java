@@ -7,7 +7,6 @@ import io.netty.channel.ChannelHandlerContext;
 import io.netty.handler.codec.MessageToByteEncoder;
 import panda.rpc.serializer.CommonSerializer;
 
-
 /**
  * 通用的编码拦截器
  */

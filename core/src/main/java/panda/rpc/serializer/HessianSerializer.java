@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import panda.rpc.enumeration.SerializerCode;
 import panda.rpc.exception.SerializeException;
+
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -48,7 +49,8 @@ public class HessianSerializer implements CommonSerializer {
             logger.error("序列化时有错误发生:", e);
             throw new SerializeException("序列化时有错误发生");
         } finally {
-            if (hessianInput != null) hessianInput.close();
+            if (hessianInput != null)
+                hessianInput.close();
         }
     }
 

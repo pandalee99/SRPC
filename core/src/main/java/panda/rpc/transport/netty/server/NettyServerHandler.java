@@ -17,8 +17,8 @@ import panda.rpc.handler.RequestHandler;
  */
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyServerHandler.class);
-    private final RequestHandler requestHandler;
+    private static final Logger         logger = LoggerFactory.getLogger(NettyServerHandler.class);
+    private final        RequestHandler requestHandler;
 
     public NettyServerHandler() {
         this.requestHandler = SingletonFactory.getInstance(RequestHandler.class);
@@ -27,7 +27,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
     @Override
     protected void channelRead0(ChannelHandlerContext ctx, RpcRequest msg) throws Exception {
         try {
-            if(msg.getHeartBeat()) {
+            if (msg.getHeartBeat()) {
                 logger.info("接收到客户端心跳包...");
                 return;
             }

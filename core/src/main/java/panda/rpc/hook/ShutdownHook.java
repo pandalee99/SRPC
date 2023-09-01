@@ -5,7 +5,6 @@ import org.slf4j.LoggerFactory;
 import panda.rpc.factory.ThreadPoolFactory;
 import panda.rpc.util.NacosUtil;
 
-
 public class ShutdownHook {
 
     private static final Logger logger = LoggerFactory.getLogger(ShutdownHook.class);

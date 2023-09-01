@@ -25,17 +25,18 @@ import java.util.concurrent.TimeUnit;
 
 public class ChannelProvider {
 
-    private static final Logger logger = LoggerFactory.getLogger(ChannelProvider.class);
-    private static EventLoopGroup eventLoopGroup;
-    private static Bootstrap bootstrap = initializeBootstrap();
+    private static final Logger         logger    = LoggerFactory.getLogger(ChannelProvider.class);
+    private static       EventLoopGroup eventLoopGroup;
+    private static       Bootstrap      bootstrap = initializeBootstrap();
 
     private static Map<String, Channel> channels = new ConcurrentHashMap<>();
 
-    public static Channel get(InetSocketAddress inetSocketAddress, CommonSerializer serializer) throws InterruptedException {
+    public static Channel get(InetSocketAddress inetSocketAddress, CommonSerializer serializer)
+            throws InterruptedException {
         String key = inetSocketAddress.toString() + serializer.getCode();
         if (channels.containsKey(key)) {
             Channel channel = channels.get(key);
-            if(channels != null && channel.isActive()) {
+            if (channels != null && channel.isActive()) {
                 return channel;
             } else {
                 channels.remove(key);
@@ -60,11 +61,12 @@ public class ChannelProvider {
             return null;
         }
         channels.put(key, channel);
-        logger.info("创造一个Channel"+channel.toString());
+        logger.info("创造一个Channel" + channel.toString());
         return channel;
     }
 
-    private static Channel connect(Bootstrap bootstrap, InetSocketAddress inetSocketAddress) throws ExecutionException, InterruptedException {
+    private static Channel connect(Bootstrap bootstrap, InetSocketAddress inetSocketAddress)
+            throws ExecutionException, InterruptedException {
         CompletableFuture<Channel> completableFuture = new CompletableFuture<>();
         bootstrap.connect(inetSocketAddress).addListener((ChannelFutureListener) future -> {
             if (future.isSuccess()) {

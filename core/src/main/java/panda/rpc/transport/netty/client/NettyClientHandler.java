@@ -14,7 +14,6 @@ import panda.rpc.entity.RpcResponse;
 import panda.rpc.factory.SingletonFactory;
 import panda.rpc.serializer.CommonSerializer;
 
-
 import java.net.InetSocketAddress;
 
 /**

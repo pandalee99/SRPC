@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ProtobufSerializer implements CommonSerializer {
 
-    private LinkedBuffer buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+    private LinkedBuffer             buffer      = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
     private Map<Class<?>, Schema<?>> schemaCache = new ConcurrentHashMap<>();
 
     @Override
